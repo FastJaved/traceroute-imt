@@ -67,23 +67,6 @@ def traceroute_to_ip(ip):
     firebase = firebase.FirebaseApplication('https://capitrain.firebaseio.com/', None)
     result = firebase.post('/traceroute/', location_list)
 
-
-def traceroute_to_all():
-    firebase = firebase.FirebaseApplication('https://capitrain.firebaseio.com/', None)
-    result = firebase.get('/traceroute/', '')
-
-    url = "https://ipinfo.io/?token=1ec60bcab59f26"
-    call_for_ip = requests.get(url)
-    my_ip = call_for_ip.json()['ip']
-
-    list_of_ips = []
-
-    for key, value in result.items():
-        if my_ip != value[-1]['ip'] :
-            list_of_ips.append(value[-1]['ip'])
-
-    traceroute_to_ip(list_of_ips)
-
 def install_npcap():
     url ="https://nmap.org/npcap/dist/npcap-1.00.exe"
     filename = 'npcap.exe'
