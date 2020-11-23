@@ -1,12 +1,13 @@
 import os
 from scapy.all import *
 import argparse
-from firebase import firebase
 import requests
 import urllib.request
 from progressbar import ProgressBar
 
 def simple_traceroute() :
+    from firebase import firebase
+
     db_conn = firebase.FirebaseApplication('https://capitrain.firebaseio.com/', None)
     database_ips = db_conn.get('/traceroute/', '')
     target_ips = []
@@ -39,13 +40,14 @@ def simple_traceroute() :
                 #url = "http://ipwhois.app/json/" + ip
                 call = requests.get(url)
                 if 'bogon' not in call.json() :
-                    location_list.append({"ip" : i, "location" : {"longitude" : call.json()['loc'].split(',')[1], "latitude" : call.json()['loc'].split(',')[0], "city" : call.json()['city']}})
+                    location_list.append({"ip" : i, "provider" : call.json().get('org',''), "location" : {"longitude" : call.json()['loc'].split(',')[1], "latitude" : call.json()['loc'].split(',')[0], "city" : call.json()['city']}})
             db_conn = firebase.FirebaseApplication('https://capitrain.firebaseio.com/', None)
             db_conn.post('/traceroute/', location_list)
 
     return list_of_ips
 
 def traceroute_to_ip(ip):
+    from firebase import firebase
     target = ip
     ip_list = []
     location_list = []
@@ -62,19 +64,29 @@ def traceroute_to_ip(ip):
         #url = "http://ipwhois.app/json/" + ip
         call = requests.get(url)
         if 'bogon' not in call.json() :
-            location_list.append({"ip" : ips, "location" : {"longitude" : call.json()['loc'].split(',')[1], "latitude" : call.json()['loc'].split(',')[0], "city" : call.json()['city']}})
+            location_list.append({"ip" : ips, "provider" : call.json().get('org',''), "location" : {"longitude" : call.json()['loc'].split(',')[1], "latitude" : call.json()['loc'].split(',')[0], "city" : call.json()['city']}})
 
-    firebase = firebase.FirebaseApplication('https://capitrain.firebaseio.com/', None)
-    result = firebase.post('/traceroute/', location_list)
+    db_conn = firebase.FirebaseApplication('https://capitrain.firebaseio.com/', None)
+    result = db_conn.post('/traceroute/', location_list)
 
 def install_npcap():
-    url ="https://nmap.org/npcap/dist/npcap-1.00.exe"
-    filename = 'npcap.exe'
+    if platform.system() == 'Windows' :
+        url ="https://nmap.org/npcap/dist/npcap-1.00.exe"
+        filename = 'npcap.exe'
+        
+        urllib.request.urlretrieve(url, filename)
+        os.system(filename)
     
-    urllib.request.urlretrieve(url, filename)
-    os.system(filename)
 
 def main() :
+
+    try:
+        from firebase import firebase    
+    except ImportError:
+        import pip
+        pip.main(['install', 'git+git://github.com/ozgur/python-firebase@0d79d7609844569ea1cec4ac71cb9038e834c355'])
+        from firebase import firebase 
+
     parser = argparse.ArgumentParser(
         description= "Traceroute Python - Windows Edition"
     )

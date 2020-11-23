@@ -1,13 +1,10 @@
 from setuptools import setup, find_packages 
   
-with open('requirements.txt') as f: 
-    requirements = f.readlines() 
-  
 long_description = 'Traceroute with Python for Windows'
   
 setup( 
         name ='traceroute-win', 
-        version ='1.2.0', 
+        version ='2.0.0', 
         author ='Javed & Emeric', 
         author_email ='jsyedk@gmail.com', 
         description ='Traceroute with Python for Windows', 
@@ -26,6 +23,6 @@ setup(
             "Operating System :: OS Independent", 
         ), 
         keywords ='traceroute python package windows fastjaved', 
-        install_requires = [requirements], 
+        install_requires = ["scapy", "requests", "progressbar"], 
         zip_safe = False
 ) 
