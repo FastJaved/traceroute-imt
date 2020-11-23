@@ -11,6 +11,20 @@ Use pip to install the package.
 pip install traceroute-win
 ```
 
+## Requirements
+
+This package needs libpcap-dev
+
+>Linux
+```
+sudo apt-get install libpcap-dev
+```
+
+>Windows
+```
+traceroute_win --install
+```
+
 ## Usage
 
 ```
