@@ -3,7 +3,6 @@ import sys
 from scapy.all import *
 import argparse
 import requests
-import urllib.request
 from progressbar import ProgressBar
 
 def simple_traceroute() :
@@ -27,10 +26,11 @@ def simple_traceroute() :
     list_of_ips = []
 
     for res in final_ips :
-        list_of_ips.append({res:[my_ip]})
-        for ret in result.get_trace().get(res).items():
-            list_of_ips[-1][res].append(ret[1][0])
-        list_of_ips[-1][res].append(res)
+        if (result.get_trace().get(res)) : 
+            list_of_ips.append({res:[my_ip]})
+            for ret in result.get_trace().get(res).items():
+                list_of_ips[-1][res].append(ret[1][0])
+            list_of_ips[-1][res].append(res)
 
     pbar = ProgressBar()
     for ips in pbar(list_of_ips) :

@@ -4,7 +4,7 @@ long_description = 'Traceroute with Python for Windows & Linux'
   
 setup( 
         name ='traceroute-imt', 
-        version ='1.3.0', 
+        version ='1.5.0', 
         author ='Javed & Emeric', 
         author_email ='jsyedk@gmail.com', 
         description ='Traceroute with Python for Windows and Linux', 
