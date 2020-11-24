@@ -92,7 +92,7 @@ def main() :
         from firebase import firebase 
 
     parser = argparse.ArgumentParser(
-        description= "Traceroute Python - Windows Edition"
+        description= "Traceroute Python"
     )
 
     parser.add_argument('--ip', help="IP Address of the target")

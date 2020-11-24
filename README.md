@@ -8,7 +8,7 @@ The traceroute will target all the IPs in our database and will automatically ad
 Use pip to install the package.
 
 ```
-pip install traceroute-win
+pip install traceroute-imt
 ```
 
 ## Requirements
@@ -22,15 +22,15 @@ sudo apt-get install libpcap-dev
 
 >Windows
 ```
-traceroute_win --install
+traceroute-imt --install
 ```
 
 ## Usage
 
 ```
-usage: traceroute_win [-h] [--ip IP] [--all] [--install]
+usage: traceroute-imt [-h] [--ip IP] [--all] [--install]
 
-Traceroute Python - Windows Edition
+Traceroute Python
 
 optional arguments:
   -h, --help  show this help message and exit
