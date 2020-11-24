@@ -1,4 +1,4 @@
-# Traceroute - Python Edition (Windows)
+# Traceroute - Python Edition (Windows & Linux)
 
 This is a python package that does a traceroute using Scapy. <br>
 The traceroute will target all the IPs in our database and will automatically add the results in Firebase

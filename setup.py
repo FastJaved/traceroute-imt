@@ -4,7 +4,7 @@ long_description = 'Traceroute with Python for Windows'
   
 setup( 
         name ='traceroute-win', 
-        version ='2.0.0', 
+        version ='2.3.0', 
         author ='Javed & Emeric', 
         author_email ='jsyedk@gmail.com', 
         description ='Traceroute with Python for Windows', 

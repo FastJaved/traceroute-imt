@@ -1,4 +1,5 @@
 import os
+import sys
 from scapy.all import *
 import argparse
 import requests
@@ -70,12 +71,15 @@ def traceroute_to_ip(ip):
     result = db_conn.post('/traceroute/', location_list)
 
 def install_npcap():
-    if platform.system() == 'Windows' :
-        url ="https://nmap.org/npcap/dist/npcap-1.00.exe"
-        filename = 'npcap.exe'
-        
-        urllib.request.urlretrieve(url, filename)
-        os.system(filename)
+    url ="https://nmap.org/npcap/dist/npcap-1.00.exe"
+    filename = 'npcap.exe'
+    
+    if sys.version_info[0] >= 3:
+        from urllib.request import urlretrieve
+    else:
+        from urllib import urlretrieve
+    urlretrieve(url, filename)
+    os.system(filename)
     
 
 def main() :
