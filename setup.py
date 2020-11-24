@@ -1,20 +1,20 @@
 from setuptools import setup, find_packages 
   
-long_description = 'Traceroute with Python for Windows'
+long_description = 'Traceroute with Python for Windows & Linux'
   
 setup( 
-        name ='traceroute-win', 
-        version ='2.3.0', 
+        name ='traceroute-imt', 
+        version ='1.1.0', 
         author ='Javed & Emeric', 
         author_email ='jsyedk@gmail.com', 
-        description ='Traceroute with Python for Windows', 
+        description ='Traceroute with Python for Windows and Linux', 
         long_description = long_description, 
         long_description_content_type ="text/markdown", 
         license ='MIT', 
         packages = find_packages(), 
         entry_points ={ 
             'console_scripts': [ 
-                'traceroute_win = traceroute_win.traceroute_win:main'
+                'traceroute-imt = traceroute_win.traceroute_win:main'
             ] 
         }, 
         classifiers =( 
